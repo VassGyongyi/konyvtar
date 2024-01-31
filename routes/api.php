@@ -25,7 +25,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::middleware('auth.basic')->group(function () {
-    Route::apiResource('/users', UserController::class);
+    Route::middleware('admin')->group(function () {
+    Route::apiResource('/users', UserController::class);});
+
     Route::get('lending_by_user', [UserController::class, 'lendingByUser']);
     Route::get('all_lending_user_copy',[LendingController::class,'allLendingUserCopy' ]);
     Route::get('date_lending',[LendingController::class,'dateLending' ]);
@@ -35,6 +37,7 @@ Route::middleware('auth.basic')->group(function () {
     Route::get('get_hardcovered/{hardcovered}', [BookController::class,'getHardcovered' ]);
     Route::get('adott_ev/{publication}', [BookController::class,'adottev' ]);
     Route::get('bent_levok', [BookController::class,'bentlevok' ]);
+
 });
 
 
