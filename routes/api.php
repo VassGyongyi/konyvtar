@@ -30,7 +30,11 @@ Route::middleware('auth.basic')->group(function () {
     Route::get('all_lending_user_copy',[LendingController::class,'allLendingUserCopy' ]);
     Route::get('date_lending',[LendingController::class,'dateLending' ]);
     Route::get('count_lending_by_user', [UserController::class, 'countLendingByUser']);
-    
+    //lekérdezések with:
+    Route::get('title_count/{title}', [BookController::class, 'titleCount']);
+    Route::get('get_hardcovered/{hardcovered}', [BookController::class,'getHardcovered' ]);
+    Route::get('adott_ev/{publication}', [BookController::class,'adottev' ]);
+    Route::get('bent_levok', [BookController::class,'bentlevok' ]);
 });
 
 
@@ -45,3 +49,5 @@ Route::delete('/lendings/{user_id}/{copy_id}/{start}', [LendingController::class
 
 //egyéb végpontok
 Route::patch('/user_update_password/{id}', [UserController::class, 'updatePassword']);
+
+

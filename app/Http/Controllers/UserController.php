@@ -74,5 +74,6 @@ class UserController extends Controller
         ->count();
         return $lendings;
     }
+    
 
 }
