@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Copy;
+use App\Models\Lending;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -33,6 +35,8 @@ class BookController extends Controller
     }
     public function destroy($id)
     {
+        if( Copy::where("book_id",$id)->exists())
+        return response("Nem törölhetsz könyvet, amíg van példány!", 401);      
         //find helyett a paraméter
         Book::find($id)->delete();
     }
