@@ -77,4 +77,29 @@ class BookController extends Controller
                     return $copies;
                 }
 
+               // Határozd meg a könyvtár nyilvántartásában legalább 2 könyvvel rendelkező szerzőket!
+                public function tobbkonyvesszerzo(){
+                    $authors = DB::table('books')
+                    ->selectRaw('author, count(*)')
+                    
+                    ->groupBy('author')
+                    ->having('count(*)','>', 1)
+                    // ->toRawSql();
+                    ->get();
+                    return $authors;
+
+                }
+                //Listázd ki a mai napon visszahozott könyveket!
+                public function mavisszahozott(){
+                    $list=DB::table('lendings as l')
+                    ->select('author','title')
+                    ->join('copies as c' ,'l.copy_id','=','c.copy_id')
+                    ->join('books as b' ,'c.book_id','=','b.book_id')
+                    ->whereDate('end','=',now())
+                    
+                     //->toRawSql();
+                    ->get();
+                    return $list;
+                }
+
 }

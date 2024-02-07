@@ -22,9 +22,8 @@ class LendingController extends Controller
     public function store(Request $request)
     {
         $lending = new Lending();
-        $lending->user_id = $request->user_id;
-        $lending->copy_id = $request->copy_id;
-        $lending->start = $request->start;
+        $lending ->fill($request->all());
+       
         $lending->save();
     }
 
@@ -36,16 +35,18 @@ class LendingController extends Controller
         $lending = Lending::where('user_id', $user_id)->where('copy_id', $copy_id)->where('start', $start)->get();
         return $lending[0];
     }
-
+   
     /**
      * Update the specified resource in storage.
      */
     //egyelőre ezt nincs értelme
-    /* public function update(Request $request, $user_id, $copy_id, $start)
+     public function update(Request $request, $user_id, $copy_id, $start)
     {
         $lending = $this->show($user_id, $copy_id, $start);
+        $lending ->fill($request->all());
+        $lending->save();
         
-    } */
+    } 
 
     /**
      * Remove the specified resource from storage.

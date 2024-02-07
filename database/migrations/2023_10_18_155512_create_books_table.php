@@ -33,6 +33,16 @@ return new class extends Migration
             'title' => "Száz év magány", 
             
         ]);
+        Book::create([
+            'author' => "Marquez", 
+            'title' => "Valami", 
+            
+        ]);
+        Book::create([
+            'author' => "Marquez", 
+            'title' => "Száz év magány2", 
+            
+        ]);
     }
 
     /**

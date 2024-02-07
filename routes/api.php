@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
@@ -39,7 +40,7 @@ Route::middleware('auth.basic')->group(function () {
     Route::get('get_hardcovered/{hardcovered}', [BookController::class,'getHardcovered' ]);
     Route::get('adott_ev/{publication}', [BookController::class,'adottev' ]);
     Route::get('bent_levok', [BookController::class,'bentlevok' ]);
-
+    Route::get('ma_visszahozott', [BookController::class,'mavisszahozott' ]);
 });
 
 
@@ -63,4 +64,5 @@ Route::put('/reservations/{book_id}/{user_id}/{start}', [ReservationController::
 //egyéb végpontok
 Route::patch('/user_update_password/{id}', [UserController::class, 'updatePassword']);
 
-
+Route::get('/tobbkonyves_szerzo', [BookController::class,'tobbkonyvesszerzo' ]);
+Route::get('ma_visszahozott', [BookController::class,'mavisszahozott' ]);
