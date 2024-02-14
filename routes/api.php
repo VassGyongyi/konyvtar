@@ -41,6 +41,9 @@ Route::middleware('auth.basic')->group(function () {
     Route::get('adott_ev/{publication}', [BookController::class,'adottev' ]);
     Route::get('bent_levok', [BookController::class,'bentlevok' ]);
     Route::get('ma_visszahozott', [BookController::class,'mavisszahozott' ]);
+
+    Route::patch('bring-back/{copy_id}/{start}', [LendingController::class, 'bringBack']);
+    Route::post('/lendings', [LendingController::class, 'store']);
 });
 
 

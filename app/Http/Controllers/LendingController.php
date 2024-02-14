@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Lending;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class LendingController extends Controller
 {
@@ -69,6 +71,18 @@ class LendingController extends Controller
     
         return $datas;
     }
+public function bringBack($copy_id, $start){
+    //két patch kérés egy függvényben
+    //első módosítás
+    $user = Auth::user();
+    $lending = $this ->show($user->id, $copy_id, $start);
+    $lending ->end =date(now());
+    $lending ->save();
+//második módosítás
+    DB::table('copies')
+    ->where('copy_id', $copy_id)
+    ->update(['status'=>0]);
 
+}
 
 }
